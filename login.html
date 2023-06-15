@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+  <title>Formulario de inicio de sesión</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="java.js"></script>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #7e1a1a57;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      margin-top: 100px;
+      background-color: #fff;
+      border: 3px solid #ccc;
+      border-radius: 5px;
+      padding: 35px;
+    }
+
+    .container h2 {
+      text-align: center;
+    }
+
+    .container input[type="text"],
+    .container input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .container input[type="submit"] {
+      width: 100%;
+      padding: 15px;
+      background-color: #18152f;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .container input[type="submit"]:hover {
+      background-color: #0d1141;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a class="color1" href="#">Inicio</a></li>
+      <li><a class="color2" href="#">Acerca de</a></li>
+      <li><a class="color3" href="#">Servicios</a></li>
+      <li> <a  class="color4" href="#">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Modulo Administrador</h2>
+    <form id="loginForm">
+      <label for="username">Usuario:</label>
+      <input type="text" id="username" name="username" required>
+      <br>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" required>
+      <br>
+      <input type="submit" value="Iniciar sesión">
+    </form>
+  </div>
+
+
+</body>
+</html>

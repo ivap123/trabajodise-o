@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Módulo de Reportes de Ventas</title>
+  <style>
+    /* Estilos CSS */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #170f40;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fbfbf4;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .sales-form {
+      margin-bottom: 20px;
+    }
+
+    .sales-form h3 {
+      margin-top: 0;
+    }
+
+    .sales-form label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .sales-form input[type="text"],
+    .sales-form input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    .sales-form button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #0e0931;
+      color: #ece9e9;
+      border: none;
+      cursor: pointer;
+      border-radius: 20px;
+    }
+    button:hover{
+      background-color: rgb(37, 26, 10);
+    }
+
+    .sales-table {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #090810;
+    }
+
+    table th:last-child,
+    table td:last-child {
+      text-align: right;
+    }
+
+    table tbody tr:hover {
+      background-color: #201616;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Módulo de Reportes de Ventas</h2>
+    
+    <div class="sales-form">
+      <h3>Agregar Venta</h3>
+      <div>
+        <label for="product-input">Producto:</label>
+        <input type="text" id="product-input" required>
+      </div>
+      <div>
+        <label for="quantity-input">Cantidad:</label>
+        <input type="number" id="quantity-input" required>
+      </div>
+      <div>
+        <label for="price-input">Precio:</label>
+        <input type="number" id="price-input" required>
+      </div>
+      <div>
+        <label for="worker-input">Trabajador:</label>
+        <input type="text" id="worker-input" required>
+      </div>
+      <button onclick="addSale()">Agregar Venta</button>
+    </div>
+
+    <div class="sales-table">
+      <h3>Reporte de Ventas</h3>
+      <table id="sales-report">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Trabajador</th>
+            <th>Fecha</th>
+            <th>Precio Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Filas de ventas agregadas dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      function addSale() {
+        var product = document.getElementById('product-input').value;
+        var quantity = document.getElementById('quantity-input').value;
+        var price = document.getElementById('price-input').value;
+        var worker = document.getElementById('worker-input').value;
+        var date = new Date().toLocaleDateString(); // Obtiene la fecha actual
+        var totalPrice = price * quantity; // Calcula el precio total
+
+        var table = document.getElementById('sales-report').getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow();
+        newRow.innerHTML = '<td>' + product + '</td><td>' + quantity + '</td><td>' + price + '</td><td>' + worker + '</td><td>' + date + '</td><td>' + totalPrice + '</td>';
+      }
+    </script>
+  </div>
+</body>
+</html>
+

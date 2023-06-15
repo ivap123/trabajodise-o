@@ -1,0 +1,123 @@
+nav {
+    background-color: #b3b5d8de;
+    padding: 10px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+  animation: fade-in 2s forwards;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+   
+
+  }
+  
+  nav ul li {
+    display: inline;
+    
+  }
+  
+  nav ul li a {
+    color: #020602;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 15px;
+
+  }
+  
+  nav ul li a:hover {
+    background-color: #253d72;
+   
+
+  }
+
+.color1 {
+    color: #ececf0;
+    background-color:  rgb(12, 23, 152);
+    border-radius: 5px;
+    margin-top: 50px;
+    align-items: center;
+
+}
+.color2{
+    color: #efeff0;
+    background-color:  rgb(12, 23, 152);
+    border-radius: 5px;
+    margin-top: 50px;
+
+}
+.color3{
+    color: rgb(246, 246, 246);
+    background-color: rgb(12, 23, 152);
+    border-radius: 5px;
+    margin-top: 50px;
+}
+.color4{
+    color: #fefefe;
+    background-color:  rgb(12, 23, 152);
+    border-radius: 5px;
+    margin-top: 50px;
+
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+  }
+  
+  nav ul li a:hover {
+    background-color: #555;
+  }
+
+  body {
+    background-image: url("ivan.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 3;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+  }
+  
+  nav ul li a:hover {
+    background-color: #555;
+  }

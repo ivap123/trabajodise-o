@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Módulo de Trabajadores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f074f;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 800px;
+      margin: 0 auto;
+      margin-top: 50px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+    }
+
+    .container h2 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table th,
+    table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #f5f5f5;
+    }
+
+    .add-button {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .add-button button {
+      padding: 10px 20px;
+      background-color: #0a0838;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    .add-button button:hover {
+      background-color: #45a049;
+    }
+
+    .delete-button,
+    .edit-button {
+      text-align: center;
+    }
+
+    .delete-button button,
+    .edit-button button {
+      padding: 6px 12px;
+      background-color: #1e0a5a;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .delete-button button:hover,
+    .edit-button button:hover {
+      background-color: #cc0000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Módulo de Trabajadores</h2>
+    <table id="workers-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Cargo</th>
+          <th>Sueldo</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Empleado 1</td>
+          <td>Desarrollador</td>
+          <td>$5000</td>
+          <td class="edit-button"><button onclick="editWorker(this)">Editar</button></td>
+          <td class="delete-button"><button onclick="deleteWorker(this)">Eliminar</button></td>
+        </tr>
+        <tr>
+          <td>Empleado 2</td>
+          <td>Diseñador</td>
+          <td>$4000</td>
+          <td class="edit-button"><button onclick="editWorker(this)">Editar</button></td>
+          <td class="delete-button"><button onclick="deleteWorker(this)">Eliminar</button></td>
+        </tr>
+        <tr>
+          <td>Empleado 3</td>
+          <td>Gerente</td>
+          <td>$8000</td>
+          <td class="edit-button"><button onclick="editWorker(this)">Editar</button></td>
+          <td class="delete-button"><button onclick="deleteWorker(this)">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="add-button">
+      <button onclick="showAddWorkerForm()">Agregar Trabajador</button>
+    </div>
+    <div id="add-worker-form" style="display: none;">
+      <h3>Agregar Trabajador</h3>
+      <input type="text" id="worker-name" placeholder="Nombre" required>
+      <input type="text" id="worker-position" placeholder="Cargo" required>
+      <input type="number" id="worker-salary" placeholder="Sueldo" required>
+      <div>
+        <button onclick="addWorker()">Guardar</button>
+        <button onclick="hideAddWorkerForm()">Cancelar</button>
+      </div>
+    </div>
+
+    <script>
+      function showAddWorkerForm() {
+        document.getElementById('add-worker-form').style.display = 'block';
+      }
+
+      function hideAddWorkerForm() {
+        document.getElementById('add-worker-form').style.display = 'none';
+        clearAddWorkerForm();
+      }
+
+      function clearAddWorkerForm() {
+        document.getElementById('worker-name').value = '';
+        document.getElementById('worker-position').value = '';
+        document.getElementById('worker-salary').value = '';
+      }
+
+      function addWorker() {
+        var workerName = document.getElementById('worker-name').value;
+        var workerPosition = document.getElementById('worker-position').value;
+        var workerSalary = document.getElementById('worker-salary').value;
+
+        var table = document.getElementById('workers-table').getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow();
+        newRow.innerHTML = '<td>' + workerName + '</td><td>' + workerPosition + '</td><td>' + workerSalary + '</td><td class="edit-button"><button onclick="editWorker(this)">Editar</button></td><td class="delete-button"><button onclick="deleteWorker(this)">Eliminar</button></td>';
+
+        clearAddWorkerForm();
+        hideAddWorkerForm();
+      }
+
+      function deleteWorker(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+      }
+
+      function editWorker(button) {
+        var row = button.parentNode.parentNode;
+        var name = row.cells[0].textContent;
+        var position = row.cells[1].textContent;
+        var salary = row.cells[2].textContent;
+
+        document.getElementById('worker-name').value = name;
+        document.getElementById('worker-position').value = position;
+        document.getElementById('worker-salary').value = salary;
+
+        row.parentNode.removeChild(row);
+        showAddWorkerForm();
+      }
+    </script>
+  </div>
+</body>
+</html>

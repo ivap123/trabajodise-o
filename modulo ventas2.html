@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Módulo de Ventas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #080c40;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 800px;
+      margin: 0 auto;
+      margin-top: 50px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+    }
+
+    .container h2 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table th,
+    table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #000000;
+    }
+
+    table th {
+      background-color: #bcb4b4;
+    }
+
+    .add-button {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .add-button button {
+      padding: 10px 20px;
+      background-color: #180c3b;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    .add-button button:hover {
+      background-color: #2b1e51;
+    }
+
+    .return-button {
+      text-align: center;
+    }
+
+    .return-button button {
+      padding: 6px 12px;
+      background-color: #0c170a;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+
+    .return-button button:hover {
+      background-color: #cc0000;
+    }
+
+    .payment-options {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .payment-option label {
+      display: flex;
+      align-items: center;
+    }
+
+    .payment-option input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    .adjustment-form {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .adjustment-form input[type="number"] {
+      width: 100px;
+    }
+
+    .adjustment-form button {
+      margin-top: 10px;
+      padding: 6px 12px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .adjustment-form button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Módulo de Ventas</h2>
+    <table id="sales-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+          <th>Método de Pago</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Producto 1</td>
+          <td>$10.00</td>
+          <td>2</td>
+          <td>$20.00</td>
+          <td>Efectivo</td>
+          <td class="return-button"><button onclick="returnSale(this)">Devolución</button></td>
+        </tr>
+        <tr>
+          <td>Producto 2</td>
+          <td>$15.00</td>
+          <td>1</td>
+          <td>$15.00</td>
+          <td>Tarjeta de Crédito</td>
+          <td class="return-button"><button onclick="returnSale(this)">Devolución</button></td>
+        </tr>
+        <tr>
+          <td>Producto 3</td>
+          <td>$8.00</td>
+          <td>3</td>
+          <td>$24.00</td>
+          <td>Tarjeta de Débito</td>
+          <td class="return-button"><button onclick="returnSale(this)">Devolución</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="add-button">
+      <button onclick="showAddSaleForm()">Registrar Venta</button>
+    </div>
+    <div id="add-sale-form" style="display: none;">
+      <h3>Registrar Venta</h3>
+      <input type="text" id="product-name" placeholder="Producto" required>
+      <input type="number" id="product-price" placeholder="Precio" step="0.01" required>
+      <input type="number" id="product-quantity" placeholder="Cantidad" required>
+      <div class="payment-options">
+        <div class="payment-option">
+          <input type="radio" id="payment-cash" name="payment" value="cash" checked>
+          <label for="payment-cash">Efectivo</label>
+        </div>
+        <div class="payment-option">
+          <input type="radio" id="payment-credit" name="payment" value="credit">
+          <label for="payment-credit">Tarjeta de Crédito</label>
+        </div>
+        <div class="payment-option">
+          <input type="radio" id="payment-debit" name="payment" value="debit">
+          <label for="payment-debit">Tarjeta de Débito</label>
+        </div>
+      </div>
+      <div>
+        <button onclick="addSale()">Registrar</button>
+        <button onclick="hideAddSaleForm()">Cancelar</button>
+      </div>
+    </div>
+    <div class="adjustment-form" id="adjust-cash-form">
+      <h4>Ajuste de Cambio</h4>
+      <input type="number" id="adjust-cash-amount" placeholder="Cantidad" required>
+      <button onclick="applyAdjustment('cash')">Aplicar Cambio</button>
+    </div>
+    <div class="adjustment-form" id="adjust-refund-form">
+      <h4>Ajuste de Reembolso</h4>
+      <input type="number" id="adjust-refund-amount" placeholder="Cantidad" required>
+      <button onclick="applyAdjustment('refund')">Aplicar Reembolso</button>
+    </div>
+
+    <script>
+      function showAddSaleForm() {
+        document.getElementById('add-sale-form').style.display = 'block';
+      }
+
+      function hideAddSaleForm() {
+        document.getElementById('add-sale-form').style.display = 'none';
+        clearAddSaleForm();
+      }
+
+      function clearAddSaleForm() {
+        document.getElementById('product-name').value = '';
+        document.getElementById('product-price').value = '';
+        document.getElementById('product-quantity').value = '';
+        document.getElementById('payment-cash').checked = true;
+      }
+
+      function addSale() {
+        var productName = document.getElementById('product-name').value;
+        var productPrice = document.getElementById('product-price').value;
+        var productQuantity = document.getElementById('product-quantity').value;
+        var paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+
+        var total = (parseFloat(productPrice) * parseInt(productQuantity)).toFixed(2);
+
+        var table = document.getElementById('sales-table').getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow();
+        newRow.innerHTML = '<td>' + productName + '</td><td>$' + productPrice + '</td><td>' + productQuantity + '</td><td>$' + total + '</td><td>' + paymentMethod + '</td><td class="return-button"><button onclick="returnSale(this)">Devolución</button></td>';
+
+        clearAddSaleForm();
+        hideAddSaleForm();
+      }
+
+      function returnSale(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+      }
+
+      function applyAdjustment(adjustmentType) {
+        var amount;
+        var message;
+
+        if (adjustmentType === 'cash') {
+          amount = document.getElementById('adjust-cash-amount').value;
+          message = 'Se ha realizado un ajuste de cambio por $' + amount;
+        } else if (adjustmentType === 'refund') {
+          amount = document.getElementById('adjust-refund-amount').value;
+          message = 'Se ha realizado un ajuste de reembolso por $' + amount;
+        }
+
+        alert(message);
+        clearAdjustmentForm(adjustmentType);
+      }
+
+      function clearAdjustmentForm(adjustmentType) {
+        if (adjustmentType === 'cash') {
+          document.getElementById('adjust-cash-amount').value = '';
+        } else if (adjustmentType === 'refund') {
+          document.getElementById('adjust-refund-amount').value = '';
+        }
+      }
+    </script>
+  </div>
+</body>
+</html>
